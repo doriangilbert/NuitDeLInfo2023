@@ -1,23 +1,27 @@
 h1{
     text-align: center;
     margin-top: 1%;
-};
+}
 
 
 h2{
     font-size:24px;
-};
+}
 
-.circle {
-    background: #ddd;
-    border-radius: 50%;
-    height: 0;
-    padding-bottom: 100%;
-    width: 100%;
-  }
+li::marker{
+    font-size: 1.75em;
+    line-height: 0.1;
+}
+
+ul li {
+    margin-left: 2em;
+}
 
 p{
     text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-    margin-left: 1%;
+    margin-left: 0.5%;
     margin-bottom: 0.5%;
 };
+
+
+
