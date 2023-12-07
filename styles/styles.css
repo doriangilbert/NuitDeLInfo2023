@@ -4,11 +4,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat");
 
 body {
-    font-family: "Open Sans", sans-serif;
-    background-color: #f0f0f0;
-    background-image: url("../images/main_background.svg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("../images/main_background.svg");
     background-size: cover;
     background-position: top;
+    font-family: "Open Sans", sans-serif;
 }
 
 h1 {
