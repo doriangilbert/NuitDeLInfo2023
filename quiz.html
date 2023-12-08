@@ -12,21 +12,86 @@
 
 <body class="h-100 text-white">
     <div class="d-flex justify-content-center align-items-center h-100 flex-column">
-        <h1>Question X</h1>
-        <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id venenatis nulla. Duis
-            sit amet blandit odio, eget ultricies metus. Aliquam ornare sit amet justo a pulvinar. Etiam vitae pharetra
+
+        <script>
+            var obj = null;
+            const json1 = '{"question":{"id":1,"enonce":"Qu\'est-ce qui prend le plus de part dans notre empreinte carbone en France ?","reponses":[{"id":1,"enonce":"L\'alimentation","correcte":false},{"id":2,"enonce":"L\'habitat","correcte":false},{"id":3,"enonce":"Les déplacements","correcte":true},{"id":4,"enonce":"Les équipements","correcte":false}]}}';
+            const json2 = '{"question":{"id":2,"enonce":"Quelle part le CO2 représente-t-il dans les émissions de gaz à effet de serre ?","reponses":[{"id":1,"enonce":"45%","correcte":false},{"id":2,"enonce":"55%","correcte":false},{"id":3,"enonce":"65%","correcte":false},{"id":4,"enonce":"75%","correcte":true}]}}';
+            const json3 = '{"question":{"id":3,"enonce":"Quel était la limitation de la hausse de la température signée par les accords de Paris en 2015 ?","reponses":[{"id":1,"enonce":"1°C en 200 ans","correcte":false},{"id":2,"enonce":"2°C en 200 ans","correcte":true},{"id":3,"enonce":"2°C en 300 ans","correcte":false},{"id":4,"enonce":"3°C en 300 ans","correcte":false}]}}';
+            const obj1 = JSON.parse(json1);
+            const obj2 = JSON.parse(json2);
+            const obj3 = JSON.parse(json3);
+            const list_obj = [obj1, obj2, obj3];
+            var compteur = 0;
+
+            document.addEventListener("DOMContentLoaded", function () {
+                obj = list_obj[compteur];
+                document.getElementById("titre_question").innerText = "Question " + obj.question.id;
+                document.getElementById("enonce_question").innerText = obj.question.enonce;
+                document.getElementById("btn_reponseA").innerText = obj.question.reponses[0].enonce;
+                document.getElementById("btn_reponseB").innerText = obj.question.reponses[1].enonce;
+                document.getElementById("btn_reponseC").innerText = obj.question.reponses[2].enonce;
+                document.getElementById("btn_reponseD").innerText = obj.question.reponses[3].enonce;
+            });
+
+            function verif() {
+                var btnA = document.getElementById("btn_reponseA");
+                var btnB = document.getElementById("btn_reponseB");
+                var btnC = document.getElementById("btn_reponseC");
+                var btnD = document.getElementById("btn_reponseD");
+                var liste_btn = [btnA, btnB, btnC, btnD];
+                for (var i = 0; i < liste_btn.length; i++) {
+                    if (obj.question.reponses[i].correcte == false) {
+                        liste_btn[i].classList.remove("btn-success");
+                        liste_btn[i].classList.add("btn-danger");
+                    }
+                }
+                document.getElementById("btn_suivant").classList.remove("d-none");
+            }
+
+            function suivant() {
+                var btnA = document.getElementById("btn_reponseA");
+                var btnB = document.getElementById("btn_reponseB");
+                var btnC = document.getElementById("btn_reponseC");
+                var btnD = document.getElementById("btn_reponseD");
+                var liste_btn = [btnA, btnB, btnC, btnD];
+                for (var i = 0; i < liste_btn.length; i++) {
+                    liste_btn[i].classList.remove("btn-danger");
+                    liste_btn[i].classList.add("btn-success");
+                }
+                compteur++;
+                obj = list_obj[compteur];
+                document.getElementById("titre_question").innerText = "Question " + obj.question.id;
+                document.getElementById("enonce_question").innerText = obj.question.enonce;
+                document.getElementById("btn_reponseA").innerText = obj.question.reponses[0].enonce;
+                document.getElementById("btn_reponseB").innerText = obj.question.reponses[1].enonce;
+                document.getElementById("btn_reponseC").innerText = obj.question.reponses[2].enonce;
+                document.getElementById("btn_reponseD").innerText = obj.question.reponses[3].enonce;
+            }
+        </script>
+
+        <h1 id="titre_question">Question X</h1>
+        <p id="enonce_question" class="text-center m-2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id venenatis nulla. 
+            Duissit amet blandit odio, eget ultricies metus. Aliquam ornare sit amet justo a pulvinar. Etiam vitae pharetra
             ipsum. Morbi massa tellus, dapibus ac enim a, aliquet tristique mauris. Curabitur maximus tellus sed erat
-            mollis ultrices.</p>
+            mollis ultrices.
+        </p>
         <div class="container">
             <div class="row m-1">
-                <button class="btn btn-success border-white p-4 col m-3">Réponse A</button>
-                <button class="btn btn-success border-white p-4 col m-3">Réponse B</button>
+                <button id="btn_reponseA" class="btn btn-success border-white p-4 col m-3" onclick="verif()">Réponse
+                    A</button>
+                <button id="btn_reponseB" class="btn btn-success border-white p-4 col m-3" onclick="verif()">Réponse
+                    B</button>
             </div>
             <div class="row m-1">
-                <button class="btn btn-success border-white p-4 col m-3">Réponse C</button>
-                <button class="btn btn-success border-white p-4 col m-3">Réponse D</button>
+                <button id="btn_reponseC" class="btn btn-success border-white p-4 col m-3" onclick="verif()">Réponse
+                    C</button>
+                <button id="btn_reponseD" class="btn btn-success border-white p-4 col m-3" onclick="verif()">Réponse
+                    D</button>
             </div>
         </div>
+        <button id="btn_suivant" class="btn btn-success border-white p-4 fw-bold d-none" onclick="suivant()">Question suivante</button>
     </div>
 
     <script src="./scripts/bootstrap.bundle.min.js"></script>
